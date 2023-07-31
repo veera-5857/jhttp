@@ -1,0 +1,37 @@
+pipeline:
+  name: kafka-demo
+  identifier: kafkademo
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github_OAuth_1690535096848
+        repoName: jhttp
+        build: <+input>
+  stages:
+    - stage:
+        name: kafka stage build
+        identifier: kafka_stage_build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    shell: Sh
+                    command: |-
+                      echo "Welcome to Harness CI"
+                      mvn -B package --file pom.xml
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec: {}
