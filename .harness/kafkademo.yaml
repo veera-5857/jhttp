@@ -36,3 +36,5 @@ pipeline:
             spec: {}
           caching:
             enabled: false
+        when:
+          pipelineStatus: All
