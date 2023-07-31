@@ -1,0 +1,38 @@
+pipeline:
+  name: demo
+  identifier: demo
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github_OAuth_1690529029344
+        repoName: <+input>
+        build: <+input>
+  stages:
+    - stage:
+        name: stage-demo
+        identifier: stagedemo
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    shell: Sh
+                    command: |-
+                      echo "Welcome to Harness CI"
+
+                      mvn -B package --file pom.xml
